@@ -1,0 +1,15 @@
+NAME="Koozali SME Server"
+VERSION="{$sysconfig{ReleaseVersion}}"
+ID="koozali"
+ID_LIKE="rhel fedora centos"
+VERSION_ID="{$sysconfig{ReleaseVersion}}"
+PRETTY_NAME="Koozali SME Server {$sysconfig{ReleaseVersion}}"
+ANSI_COLOR="0;31"
+HOME_URL="https://koozali.org"
+BUG_REPORT_URL="https://bugs.koozali.org/"
+
+CENTOS_MANTISBT_PROJECT="CentOS-7"
+CENTOS_MANTISBT_PROJECT_VERSION="7"
+REDHAT_SUPPORT_PRODUCT="centos"
+REDHAT_SUPPORT_PRODUCT_VERSION="7"
+

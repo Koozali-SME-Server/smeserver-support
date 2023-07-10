@@ -1,0 +1,19 @@
+#!/usr/bin/perl -w
+# This script creates the symlinks needed by this RPM
+# Specific support exists to create symlinks within e-smith web "panels"
+# and for links from named "events" directories into the "actions" directory
+
+use esmith::Build::CreateLinks qw(:all);
+
+my $panel = "manager";
+
+panel_link("support", $panel);
+
+templates2events("/etc/$_", qw(post-install post-upgrade smeserver-support-update))
+	for (qw(issue issue.net motd redhat-release system-release sysconfig/hw-uuid));
+
+templates2events("/etc/$_", qw(post-install post-upgrade console-save smeserver-support-update))
+        for (qw( os-release ));
+
+templates2events("/etc/motd", qw(console-save remoteaccess-update smeserver-support-update));
+

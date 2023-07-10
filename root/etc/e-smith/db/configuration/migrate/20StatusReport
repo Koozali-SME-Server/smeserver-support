@@ -1,0 +1,11 @@
+{
+    my $rec = $DB->get('statusreport') 
+              || $DB->new_record('statusreport', { type => 'service' });
+
+    my %props = $rec->props;
+
+    exists $props{DayOfWeek} or $props{DayOfWeek} = int(rand(7));
+    exists $props{Hour}      or $props{Hour}      = int(rand(24));
+    exists $props{Minute}    or $props{Minute}    = int(rand(60));
+    $rec->merge_props(%props);
+}

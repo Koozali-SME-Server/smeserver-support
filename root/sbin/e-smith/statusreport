@@ -1,0 +1,66 @@
+#!/usr/bin/perl
+#----------------------------------------------------------------------
+# statusreport
+# copyright (C) 1999-2006 Mitel Corporation
+# Copyright (C) 2006 Gordon Rowell <gordonr@gormand.com.au>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License or more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+#----------------------------------------------------------------------
+
+use strict;
+use warnings;
+
+use Locale::gettext;
+use LWP;
+use LWP::Protocol::https;
+use HTTP::Request::Common;
+use Digest::SHA1 qw(sha1_hex);
+
+use esmith::ConfigDB;
+my $db = esmith::ConfigDB->open_ro or die "Couldn't open ConfigDB\n";
+
+use constant SERVERTEST => 'https://www.koozali.org/servertest/';
+
+my $sysid_hash = sha1_hex($db->get_prop('sysconfig','SystemID'));
+
+my $url = SERVERTEST 
+          . "?" 
+          . "ReleaseVersion=" . $db->get_prop('sysconfig', 'ReleaseVersion')
+          . "&SystemIDHash="  . $sysid_hash
+          . "&CurrentEpoch="  . time
+          . "&InstallEpoch="  . $db->get_prop('sysconfig', 'InstallEpoch')
+          . "&SystemMode="    . $db->get_value('SystemMode');
+
+my $ua = LWP::UserAgent->new;
+
+#return add proxy arguments if appropriate
+if ($db->get_value('SquidParent'))
+{
+    my $parent = $db->get_value('SquidParent');
+    my $port = $db->get_value('SquidParentPort') || "3128";
+    $ua->proxy(['http', 'ftp'], "http://$parent:$port/");
+}
+
+my $response;
+
+eval {
+        local $SIG{INT} = sub {die 1};
+
+        $response = $ua->get($url);
+    };
+
+exit 0 if ($response->is_success);
+
+exit 1;

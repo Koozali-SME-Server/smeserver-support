@@ -1,0 +1,7 @@
+{
+    my $sysconfig = $DB->get('sysconfig') 
+        || $DB->new_record('sysconfig', { type => 'configuration' });
+
+    $sysconfig->prop('InstallEpoch') 
+        || $sysconfig->set_prop('InstallEpoch', time);
+}

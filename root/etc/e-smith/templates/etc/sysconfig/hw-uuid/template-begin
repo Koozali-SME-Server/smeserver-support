@@ -1,0 +1,1 @@
+{ use Data::UUID; $sysconfig{SystemID} || new Data::UUID->create_str }

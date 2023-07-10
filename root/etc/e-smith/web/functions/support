@@ -1,0 +1,58 @@
+#!/usr/bin/perl -wT
+
+#----------------------------------------------------------------------
+# heading     : Miscellaneous
+# description : Support and licensing
+# navigation  : 5000 5300
+#----------------------------------------------------------------------
+# copyright (C) 2002 Mitel Networks Corporation
+# 
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 		
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 		
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+# 
+# Technical support for this program is available from Mitel Networks 
+# Please visit our web site www.e-smith.com for details.
+#----------------------------------------------------------------------
+
+use strict;
+use CGI ':all';
+use CGI::Carp qw(fatalsToBrowser);
+use esmith::util;
+use esmith::FormMagick;
+
+my $panel = esmith::FormMagick->new();
+esmith::util::setRealToEffective();
+$panel->display();
+
+
+sub display_licenses
+{
+	my $self = shift;
+
+    print "<TR><TD><PRE>\n";
+
+	foreach my $license (esmith::util::getLicenses($self->get_languages()))
+	{
+		print $license;
+	}
+	print "</PRE></TD></TR>\n";
+	return '';
+}
+
+__DATA__
+<form title="FORM_TITLE" header="/etc/e-smith/web/common/head.tmpl" footer="/etc/e-smith/web/common/foot.tmpl" >
+  <page name="Initial" pre-event="turn_off_buttons()">
+    <subroutine src="display_licenses()"/>
+  </page>
+</form>

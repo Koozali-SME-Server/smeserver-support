@@ -1,0 +1,11 @@
+{
+    return "# statusreport disabled"
+        unless ${statusreport}{status} eq 'enabled';
+
+    my $dow    = ${statusreport}{DayOfWeek};
+    my $hour   = ${statusreport}{Hour};
+    my $minute = ${statusreport}{Minute};
+
+    return "$minute $hour * * $dow root " 
+           . q{ sleep $[ $RANDOM \\% 60 ]; /sbin/e-smith/statusreport };
+}
