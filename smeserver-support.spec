@@ -4,7 +4,7 @@ Summary: SME Server module to display support and licensing information
 %define name smeserver-support
 Name: %{name}
 %define version 11.0.0
-%define release 1
+%define release 2
 
 # These packages come from CentOS, but we need to use care when
 # updating them - either we've patched them, or we need to do something
@@ -21,7 +21,7 @@ Group: Networking/Daemons
 Source: %{name}-%{version}.tar.xz
 
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
-BuildRequires: e-smith-devtools >= 1.7.5
+BuildRequires: smeserver-devtools >= 1.7.5
 BuildArchitectures: noarch
 Provides: server-manager-images
 AutoReqProv: no
@@ -33,22 +33,22 @@ Requires: perl(LWP::Protocol::https)
 Requires: screen
 Requires: smeserver-yum
 Requires: smeserver-clamav
-Requires: e-smith-spamassassin
+Requires: smeserver-spamassassin
 Requires: smeserver-audittools
-Requires: e-smith-formmagick >= 1.4.0-9
+Requires: smeserver-formmagick >= 1.4.0-9
 
 # These packages weren't in 5.x, or were split from e-smith-base since then
-Requires: e-smith-domains
-Requires: e-smith-ibays
-Requires: e-smith-nutUPS
-Requires: e-smith-portforwarding
+Requires: smeserver-domains
+Requires: smeserver-ibays
+Requires: smeserver-nutUPS
+Requires: smeserver-portforwarding
 Obsoletes: e-smith-starterwebsite
 
 # 5.x used bind for name resolution - we need to pull in djbdns
-Requires: e-smith-dnscache
-Requires: e-smith-tinydns
+Requires: smeserver-dnscache
+Requires: smeserver-tinydns
 
-Requires: e-smith-samba
+Requires: smeserver-samba
 
 # Pull in locales so we have a smooth language upgrade [SF: 1309520]
 Requires: smeserver-locale-bg
@@ -98,6 +98,9 @@ Requires: psacct
 Requires: dmraid
 
 %changelog
+* Sat Mar 23 2024 Brian Read <brianr@koozali.org>11.0.0-2.sme
+- Change Requires: e-smith- to Requires:smeserver-
+
 * Sat Mar 23 2024 Brian Read <brianr@koozali.org>11.0.0-1.sme
 - Update Release and Version to base version and 1st release for SME11 [SME: 12518]
 
