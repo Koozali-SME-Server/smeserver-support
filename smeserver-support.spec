@@ -3,8 +3,8 @@
 Summary: SME Server module to display support and licensing information
 %define name smeserver-support
 Name: %{name}
-%define version 2.8.0
-%define release 21
+%define version 11.0.0
+%define release 1
 
 # These packages come from CentOS, but we need to use care when
 # updating them - either we've patched them, or we need to do something
@@ -98,6 +98,9 @@ Requires: psacct
 Requires: dmraid
 
 %changelog
+* Sat Mar 23 2024 Brian Read <brianr@koozali.org>11.0.0-1.sme
+- Update Release and Version to base version and 1st release for SME11 [SME: 12518]
+
 * Mon Jul 10 2023 cvs2git.sh aka Brian Read <brianr@koozali.org> 2.8.0-21.sme
 - Roll up patches and move to git repo [SME: 12338]
 
