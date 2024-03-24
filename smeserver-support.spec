@@ -4,7 +4,7 @@ Summary: SME Server module to display support and licensing information
 %define name smeserver-support
 Name: %{name}
 %define version 11.0.0
-%define release 2
+%define release 3
 
 # These packages come from CentOS, but we need to use care when
 # updating them - either we've patched them, or we need to do something
@@ -93,11 +93,13 @@ Requires: mtr
 Requires: nano
 Requires: nc
 Requires: mc
-Requires: prelink
 Requires: psacct
-Requires: dmraid
 
 %changelog
+* Sat Mar 23 2024 Jean-Philippe Pialasse <jpp@koozali.org> 11.0.0-3.sme
+- drop dmraid support [SME: 12522]
+- drop prelink support [SME: 12523]
+
 * Sat Mar 23 2024 Brian Read <brianr@koozali.org>11.0.0-2.sme
 - Change Requires: e-smith- to Requires:smeserver-
 
