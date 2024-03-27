@@ -4,15 +4,7 @@ Summary: SME Server module to display support and licensing information
 %define name smeserver-support
 Name: %{name}
 %define version 11.0.0
-%define release 3
-
-# These packages come from CentOS, but we need to use care when
-# updating them - either we've patched them, or we need to do something
-# prior to taking the update
-
-# TODO: check mkinitrd,mdadm to see if needed
-%define centos_excludes initscripts,libgsf
-%define centos_remove   kernel,kernel-smp,kernel-xenU,mkinitrd,mdadm,openssl,samba,samba-client,samba-client-libs,samba-common,samba-common-libs,samba-common-tools,samba-libs,samba*,libsmbclient,libwbclient,libtevent,python-tevent
+%define release 4
 
 Version: %{version}
 Release: %{release}%{?dist}
@@ -96,6 +88,9 @@ Requires: mc
 Requires: psacct
 
 %changelog
+* Wed Mar 27 2024 Jean-Philippe Pialasse <jpp@koozali.org> 11.0.0-4.sme
+- removing yum_repositories related elements [SME: 12558]
+
 * Sat Mar 23 2024 Jean-Philippe Pialasse <jpp@koozali.org> 11.0.0-3.sme
 - drop dmraid support [SME: 12522]
 - drop prelink support [SME: 12523]
@@ -952,14 +947,6 @@ perl createlinks
 
 ln -s initial.cgi root/etc/e-smith/locale/en-us/etc/e-smith/web/functions/index.cgi
 find root/ -type f | xargs grep -l ____COPYYEARS____ | xargs sed -i -e 's/____COPYYEARS____/%{copykooz}/g'
-YUM_REPOS=root/etc/e-smith/db/yum_repositories/
-for dir in base updates
-do
-    mkdir -p $YUM_REPOS/defaults/$dir
-    echo %{centos_excludes} > $YUM_REPOS/defaults/$dir/Exclude
-done
-sed -i 's/CENTOS_EXCLUDES/%{centos_excludes}/' $YUM_REPOS/migrate/25CentOSExcludes
-sed -i 's/CENTOS_REMOVE/%{centos_remove}/' $YUM_REPOS/migrate/25CentOSExcludes
 
 %install
 rm -rf $RPM_BUILD_ROOT
