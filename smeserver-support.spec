@@ -4,7 +4,7 @@ Summary: SME Server module to display support and licensing information
 %define name smeserver-support
 Name: %{name}
 %define version 11.0.0
-%define release 4
+%define release 5
 
 Version: %{version}
 Release: %{release}%{?dist}
@@ -88,6 +88,9 @@ Requires: mc
 Requires: psacct
 
 %changelog
+* Thu Apr 04 2024 Brian Read <brianr@koozali.org> 11.0.0-5.sme
+- Set license file to GPL2.0  [SME: 12577]
+
 * Wed Mar 27 2024 Jean-Philippe Pialasse <jpp@koozali.org> 11.0.0-4.sme
 - removing yum_repositories related elements [SME: 12558]
 
