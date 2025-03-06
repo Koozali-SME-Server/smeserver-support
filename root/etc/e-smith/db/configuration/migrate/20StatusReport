@@ -1,6 +1,6 @@
 {
     my $rec = $DB->get('statusreport') 
-              || $DB->new_record('statusreport', { type => 'service' });
+              || $DB->new_record('statusreport', { type => 'configuration' });
 
     my %props = $rec->props;
 
@@ -8,4 +8,6 @@
     exists $props{Hour}      or $props{Hour}      = int(rand(24));
     exists $props{Minute}    or $props{Minute}    = int(rand(60));
     $rec->merge_props(%props);
+    
+   $DB->set_prop('statusreport', "type", "configuration") if  ${'statusreport'}{type} eq "service";
 }
