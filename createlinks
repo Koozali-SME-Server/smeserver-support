@@ -5,10 +5,6 @@
 
 use esmith::Build::CreateLinks qw(:all);
 
-my $panel = "manager";
-
-panel_link("support", $panel);
-
 templates2events("/etc/$_", qw(post-install post-upgrade smeserver-support-update))
 	for (qw(issue issue.net motd redhat-release system-release sysconfig/hw-uuid));
 

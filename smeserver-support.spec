@@ -4,7 +4,7 @@ Summary: SME Server module to display support and licensing information
 %define name smeserver-support
 Name: %{name}
 %define version 11.0.0
-%define release 6
+%define release 7
 
 Version: %{version}
 Release: %{release}%{?dist}
@@ -88,6 +88,9 @@ Requires: mc
 Requires: psacct
 
 %changelog
+* Thu Nov 27 2025 Jean-Philippe Pialasse <jpp@koozali.org> 11.0.0-7.sme
+- remove old server-manager panel [SME: 13343]
+
 * Wed Mar 05 2025 Jean-Philippe Pialasse <jpp@koozali.org> 11.0.0-6.sme
 - change key type from service to configuration [SME: 11367]
 
