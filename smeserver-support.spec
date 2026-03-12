@@ -4,7 +4,7 @@ Summary: SME Server module to display support and licensing information
 %define name smeserver-support
 Name: %{name}
 %define version 11.0.0
-%define release 7
+%define release 8
 
 Version: %{version}
 Release: %{release}%{?dist}
@@ -88,6 +88,9 @@ Requires: mc
 Requires: psacct
 
 %changelog
+* Thu Mar 12 2026 Jean-Philippe Pialasse <jpp@koozali.org> 11.0.0-8.sme
+- remove ehader of os-release [SME: 13464]
+
 * Thu Nov 27 2025 Jean-Philippe Pialasse <jpp@koozali.org> 11.0.0-7.sme
 - remove old server-manager panel [SME: 13343]
 
