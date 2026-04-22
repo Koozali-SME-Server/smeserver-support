@@ -5,6 +5,17 @@
     </entry>
 
     <entry>
+  <base>FRAMES_SMANAGER</base>
+  <trans>
+  <![CDATA[
+        <p><b>
+        /!\ Can not find your panel? it has moved to <A HREF="/smanager" TARGET="_blank">smanager</A> /!\
+        </b></p>
+  ]]>
+  </trans>
+    </entry>
+
+    <entry>
 	<base>FRAMES_BODY</base>
 	<trans>
 	<![CDATA[
