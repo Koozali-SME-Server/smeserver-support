@@ -5,7 +5,7 @@
 %else
 %define current_year %{build_year}
 %endif
-%define copykooz 2013 - %{current_year}
+%define copykooz 2013-%{current_year}
 Summary: SME Server module to display support and licensing information
 %define name smeserver-support
 Name: %{name}
