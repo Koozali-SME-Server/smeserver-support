@@ -1,10 +1,16 @@
 # $Id: smeserver-support.spec,v 1.25 2021/04/20 02:56:24 jpp Exp $
-%define copykooz 2013 - 2021
+%define build_year %(date +%%Y)
+%if %{build_year} < 2026
+%define current_year 2026
+%else
+%define current_year %{build_year}
+%endif
+%define copykooz 2013 - %{current_year}
 Summary: SME Server module to display support and licensing information
 %define name smeserver-support
 Name: %{name}
 %define version 11.0.0
-%define release 9
+%define release 10
 
 Version: %{version}
 Release: %{release}%{?dist}
@@ -88,6 +94,9 @@ Requires: mc
 Requires: psacct
 
 %changelog
+* Mon Sep 28 2026 Jean-Philippe Pialasse <jpp@koozali.org> 11.0.0-10.sme
+- update copyright year [SME: 13757]
+
 * Wed Apr 22 2026 Jean-Philippe Pialasse <jpp@koozali.org> 11.0.0-9.sme
 - add text to redirect from old to new manager [SME: 13300]
 
